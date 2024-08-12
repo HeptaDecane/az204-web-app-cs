@@ -1,0 +1,15 @@
+@page
+@using Microsoft.Extensions.Options
+@model BetaModel
+@inject IOptions<AppSettings> Options
+@{
+    ViewData["Title"] = "Beta";
+    var AppSettings = Options.Value;
+}
+
+<div class="container-sm">
+    <h1>Beta feature</h1>    
+    <textarea rows="5" cols="100" style="background-color:@AppSettings.BackgroundColor;color:@AppSettings.FontColor">
+        @AppSettings.Message
+    </textarea>
+</div>

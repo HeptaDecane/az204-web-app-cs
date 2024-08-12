@@ -1,3 +1,5 @@
+using Microsoft.FeatureManagement;
+
 namespace Az204WebApp;
 
 public class Program
@@ -6,10 +8,29 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        // Retrieve the connection string
+        string connectionString = builder.Configuration.GetConnectionString("AppConfig");
+        
+        // Load configuration from Azure App Configuration
+        //builder.Configuration.AddAzureAppConfiguration(connectionString);
+        builder.Configuration.AddAzureAppConfiguration(options => {
+            options.Connect(connectionString);
+            options.UseFeatureFlags();  // Load Feature Flags
+        });
+        
+        // bind Azure App Configuration settings to AppSettings model
+        builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("Settings"));
+
+        
         // Add services to the container.
         builder.Services.AddRazorPages();
         builder.Services.AddHttpClient();
         
+        // Add Azure App Configuration middleware to the container of services.
+        builder.Services.AddAzureAppConfiguration();
+
+        // Add feature management to the container of services.
+        builder.Services.AddFeatureManagement();
 
         var app = builder.Build();
 
