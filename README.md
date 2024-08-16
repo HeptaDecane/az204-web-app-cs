@@ -18,7 +18,7 @@ rm publish.zip
 az webapp browse --name az204-web-app-cs --resource-group az204-rg
 ```
 
-# containerization script
+### containerization script
 ```sh
 # sudo su
 dotnet publish -c Release -o Az204WebApp/bin/publish
