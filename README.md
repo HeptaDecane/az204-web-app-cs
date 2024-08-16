@@ -28,30 +28,47 @@ sudo su
 ```sh
 # list running containers
 docker container ls
+```
 
+```sh
 # list all containers
 docker container ls --all
+```
 
+```sh
 # stop a container
 docker container stop <CONTAINER_ID>
+```
 
+```sh
 # remove a container
 docker container rm <CONTAINER_ID>
+```
 
+```sh
 # remover all containers
 docker rm $(docker ps -aq)
+```
 
+```sh
 # list docker images
 docker image ls
+```
 
+```sh
 # pull an image from dockerhub
 docker pull <IMAGE>
+
 # eg: https://hub.docker.com/_/httpd
 docker pull httpd
+```
 
+```sh
 # run an image as container
 docker run <IMAGE>
-# eg:
-docker run -d -p 8000:80 httpd
 
+# eg:
+# -d => runs the container in detached mode, i.e. it runs in the background and doesn't block your terminal
+# -p 8000:80 => maps a port on your local machine (8000) to a port inside the container (80)
+docker run -d -p 8000:80 httpd
 ```
