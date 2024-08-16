@@ -18,6 +18,14 @@ rm publish.zip
 az webapp browse --name az204-web-app-cs --resource-group az204-rg
 ```
 
+# containerization script
+```sh
+# sudo su
+dotnet publish -c Release -o Az204WebApp/bin/publish
+docker build -t az204-web-app Az204WebApp/
+docker run -e ASPNETCORE_ENVIRONMENT=Development -d -p 80:8080 az204-web-app
+```
+
 ### docker cheat sheet
 
 ```sh
@@ -64,11 +72,23 @@ docker pull httpd
 ```
 
 ```sh
+# build a docker image
+docker image build -t <TAG> <PATH/TO/DOCEKRFILE>
+
+#eg:
+docker image build -t az204-web-app Az204WebApp/
+
+```
+
+```sh
 # run an image as container
 docker run <IMAGE>
 
 # eg:
 # -d => runs the container in detached mode, i.e. it runs in the background and doesn't block your terminal
 # -p 8000:80 => maps a port on your local machine (8000) to a port inside the container (80)
+# -e => set environment variables
 docker run -d -p 8000:80 httpd
+docker run -e ASPNETCORE_ENVIRONMENT=Development -d -p 8000:8080 az204-web-app
+
 ```
