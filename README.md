@@ -23,7 +23,9 @@ az webapp browse --name az204-web-app-cs --resource-group az204-rg
 ```sh
 # run as superuser
 sudo su
+```
 
+```sh
 # list running containers
 docker container ls
 
