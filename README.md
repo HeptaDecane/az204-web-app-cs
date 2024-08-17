@@ -92,3 +92,14 @@ docker run -d -p 8000:80 httpd
 docker run -e ASPNETCORE_ENVIRONMENT=Development -d -p 8000:8080 az204-web-app
 
 ```
+
+```sh 
+# login to a registry
+docker login <SERVER>
+
+# create an image tag
+docker image tag <SOURCE_IMAGE:TAG> <TARGET_IMAGE:TAG>
+
+# upload image to a registry
+docker image push <IMAGE:TAG>
+```
