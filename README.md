@@ -21,7 +21,6 @@ az webapp browse --name az204-web-app-cs --resource-group az204-rg
 ### containerization script
 ```sh
 # sudo su
-dotnet publish -c Release -o Az204WebApp/bin/publish
 docker build -t az204-web-app Az204WebApp/
 docker run -e ASPNETCORE_ENVIRONMENT=Development -d -p 80:8080 az204-web-app
 ```
