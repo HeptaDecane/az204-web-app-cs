@@ -43,3 +43,4 @@ msbuild.err
 msbuild.wrn
 
 appsettings.Development.json
+az204-web-app-cs.yml

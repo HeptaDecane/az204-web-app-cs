@@ -1,0 +1,49 @@
+apiVersion: 2019-12-01
+location: centralindia
+name: az204-container-group
+properties:
+  containers:
+    - name: az204-mysql-container
+      properties:
+        image: <path-to-mysql-image:tag>
+        ports:
+          - port: 3306
+            protocol: TCP
+        environmentVariables:
+          - name: MYSQL_ROOT_PASSWORD
+            value: <mysql-password>
+        resources:
+          requests:
+            cpu: 1
+            memoryInGb: 1
+    - name: az204-web-app-container
+      properties:
+        image: <path-to-web-app-image:tag>
+        ports:
+          - port: 8080
+            protocol: TCP
+        environmentVariables:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: Production
+          - name: ConnectionStrings__Az204SqlDb
+            value: <az204-sql-db-connection-string>
+          - name: ConnectionStrings__AppConfig
+            value: <app-config-connection-string>
+          - name: ConnectionStrings__Az204MysqlContainer
+            value: Server=localhost;port=3306;database=college;user=root;password=<mysql-password>
+        resources:
+          requests:
+            cpu: 1
+            memoryInGb: 1
+  osType: Linux
+  ipAddress:
+    type: Public
+    ports:
+      - protocol: tcp
+        port: 8080
+  imageRegistryCredentials:
+  - server: <registry-server>
+    username: <registry-username>
+    password: <registry-password>
+tags: null
+type: Microsoft.ContainerInstance/containerGroups0
